@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.nasaService.getImageOfTheDay().subscribe((APODFromJsonFile) => {
       this.imageOfTheDay = APODFromJsonFile;
+      console.log(this.imageOfTheDay);
     })
   }
 }

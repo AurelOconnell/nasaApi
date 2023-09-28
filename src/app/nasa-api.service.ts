@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
@@ -12,7 +12,7 @@ export class NasaAPIService {
   constructor(private http: HttpClient) {}
 
   getImageOfTheDay(): Observable<[]> {
-    const params = new HttpParams().set('apiKey', this.apiKey);
-    return this.http.get<[]>('https://api.nasa.gov/planetary/apod', { params });
+    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${this.apiKey}`;
+    return this.http.get<any>(apiUrl).pipe(map((response) => response.url));
   }
 }

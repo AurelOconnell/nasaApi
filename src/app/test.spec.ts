@@ -1,5 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
-import { NasaService } from './service/nasa.service';
+import { NasaAPIService } from './nasa-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { Observable, of } from 'rxjs';
@@ -14,12 +14,12 @@ describe('Quest Test Suite', () => {
   }));
 
   fit('service should be created', () => {
-    const service: NasaService = TestBed.get(NasaService);
+    const service: NasaAPIService = TestBed.get(NasaAPIService);
     expect(service).toBeTruthy();
   });
 
   fit('service should have a "getImageOfTheDay" method which returns an Observable<string> object', () => {
-    const service: NasaService = TestBed.get(NasaService);
+    const service: NasaAPIService = TestBed.get(NasaAPIService);
     service.getImageOfTheDay().subscribe((param_img: any) => {
       expect(param_img).toBeTruthy();
     });
@@ -33,10 +33,10 @@ describe('Quest Test Suite', () => {
 
   fit('component should have a public property named "imgOfTheDay"', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
-    const service: NasaService = TestBed.get(NasaService);
-    const mock: Observable<any> = of(
-      'https://apod.nasa.gov/apod/image/1903/IC405_Abolfath_3171.jpg'
-    );
+    const service: NasaAPIService = TestBed.get(NasaAPIService);
+    const mock: Observable<any> = of({
+      url: 'https://apod.nasa.gov/apod/image/1903/IC405_Abolfath_3171.jpg'
+    });
 
     spyOn(service, 'getImageOfTheDay').and.returnValue(mock);
 
@@ -46,7 +46,7 @@ describe('Quest Test Suite', () => {
 
   fit('component should display an image', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
-    const service: NasaService = TestBed.get(NasaService);
+    const service: NasaAPIService = TestBed.get(NasaAPIService);
     const mock: Observable<any> = of({
       url: 'https://apod.nasa.gov/apod/image/1903/IC405_Abolfath_3171.jpg',
     });
