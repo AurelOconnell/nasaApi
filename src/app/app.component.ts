@@ -8,13 +8,13 @@ import { NasaAPIService } from './nasa-api.service';
 })
 export class AppComponent implements OnInit {
   title = 'NASA';
-  imageOfTheDay: string = '';
+  imageOfTheDay: any;
 
   constructor(private nasaService: NasaAPIService) {}
 
   ngOnInit(): void {
-    this.nasaService.getImageOfTheDay().subscribe((imageUrl) => {
-      this.imageOfTheDay = imageUrl;
+    this.nasaService.getImageOfTheDay().subscribe((APODFromJsonFile) => {
+      this.imageOfTheDay = APODFromJsonFile;
     })
   }
 }
